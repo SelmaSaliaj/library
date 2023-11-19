@@ -1,0 +1,46 @@
+package com.project.controller;
+
+import com.project.domain.dto.EBookDTO;
+import com.project.service.EBookService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/ebook")
+public class EBookController {
+
+    @Autowired
+    private EBookService eBookService;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<EBookDTO> findById(@PathVariable("id") Integer id){
+        return ResponseEntity.ok(eBookService.findById(id));
+    }
+
+    @PostMapping
+    public void save(@RequestBody EBookDTO ebookDTO){
+        eBookService.save(ebookDTO);
+    }
+
+    @PutMapping
+    public void update(@RequestBody EBookDTO ebookDTO){
+        eBookService.update(ebookDTO);
+    }
+
+    @PutMapping("/softDelete/{id}")
+    public void softDelete(@PathVariable("id") Integer id){
+        eBookService.softDelete(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") Integer id){
+        eBookService.delete(id);
+    }
+
+    @PutMapping("/restore/{id}")
+    public void restore(@PathVariable("id") Integer id){
+        eBookService.restore(id);
+    }
+
+}
