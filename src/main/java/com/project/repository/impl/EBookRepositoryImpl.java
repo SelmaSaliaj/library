@@ -5,6 +5,7 @@ import com.project.filter.Filter;
 import com.project.repository.EBookRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -14,9 +15,9 @@ import java.util.Optional;
 @Repository
 public class EBookRepositoryImpl implements EBookRepository {
 
-    private static final String FIND_QUERY = "SELECT e FROM EBookEntity WHERE e.id = :id";
+    private static final String FIND_QUERY = "SELECT e FROM EBookEntity e WHERE e.id = :id";
 
-    private static final String SELECT_ALL = "SELECT e FROM EBookEntity WHERE 1 = 1";
+    private static final String SELECT_ALL = "SELECT e FROM EBookEntity e WHERE 1 = 1";
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -43,18 +44,17 @@ public class EBookRepositoryImpl implements EBookRepository {
         return entityManager.createQuery(dynamicQuery, EBookEntity.class).getResultList();
     }
 
+    @Transactional
     @Override
     public EBookEntity save(EBookEntity eBook) {
         entityManager.persist(eBook);
-        eBook.setCreatedDate(LocalDateTime.now());
-        eBook.setLastModified(LocalDateTime.now());
         return eBook;
     }
 
+    @Transactional
     @Override
     public EBookEntity update(EBookEntity eBook) {
         entityManager.merge(eBook);
-        eBook.setLastModified(LocalDateTime.now());
         return eBook;
     }
 
@@ -69,6 +69,7 @@ public class EBookRepositoryImpl implements EBookRepository {
         entity.setDeleted(true);
     }
 
+    @Transactional
     @Override
     public EBookEntity delete(EBookEntity eBook) {
         entityManager.remove(eBook);

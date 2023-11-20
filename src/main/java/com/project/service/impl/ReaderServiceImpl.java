@@ -1,6 +1,7 @@
 package com.project.service.impl;
 
 import com.project.domain.dto.ReaderDTO;
+import com.project.domain.dto.ReaderRequest;
 import com.project.domain.entity.ReaderEntity;
 import com.project.domain.mapper.ReaderMapper;
 import com.project.filter.Filter;
@@ -24,8 +25,8 @@ public class ReaderServiceImpl implements ReaderService {
     }
 
     @Override
-    public void save(ReaderDTO request) {
-        repository.save(ReaderMapper.toEntity(request));
+    public void save(ReaderRequest request) {
+        ReaderMapper.toDTO(repository.save(ReaderMapper.toEntity(request)));
     }
 
     @Override

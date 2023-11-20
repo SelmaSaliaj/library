@@ -5,6 +5,7 @@ import com.project.filter.Filter;
 import com.project.repository.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -14,9 +15,9 @@ import java.util.Optional;
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
-    private static final String FIND_QUERY = "SELECT u FROM UserEntity WHERE u.id = :id";
+    private static final String FIND_QUERY = "SELECT u FROM UserEntity u WHERE u.id = :id";
 
-    private static final String SELECT_ALL = "SELECT u FROM UserEntity WHERE 1 = 1";
+    private static final String SELECT_ALL = "SELECT u FROM UserEntity u WHERE 1 = 1";
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -43,18 +44,17 @@ public class UserRepositoryImpl implements UserRepository {
         return entityManager.createQuery(dynamicQuery, UserEntity.class).getResultList();
     }
 
+    @Transactional
     @Override
     public UserEntity save(UserEntity user) {
         entityManager.persist(user);
-        user.setCreatedDate(LocalDateTime.now());
-        user.setLastModified(LocalDateTime.now());
         return user;
     }
 
+    @Transactional
     @Override
     public UserEntity update(UserEntity user) {
         entityManager.merge(user);
-        user.setLastModified(LocalDateTime.now());
         return user;
     }
 
@@ -69,6 +69,7 @@ public class UserRepositoryImpl implements UserRepository {
         entity.setDeleted(true);
     }
 
+    @Transactional
     @Override
     public UserEntity delete(UserEntity user) {
         entityManager.remove(user);

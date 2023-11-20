@@ -6,6 +6,7 @@ import com.project.filter.Filter;
 import com.project.repository.ReaderRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -15,9 +16,9 @@ import java.util.Optional;
 @Repository
 public class ReaderRepositoryImpl implements ReaderRepository {
 
-    private static final String FIND_QUERY = "SELECT r FROM ReaderEntity WHERE r.id = :id";
+    private static final String FIND_QUERY = "SELECT r FROM ReaderEntity r WHERE r.id = :id";
 
-    private static final String SELECT_ALL = "SELECT r FROM ReaderEntity WHERE 1 = 1";
+    private static final String SELECT_ALL = "SELECT r FROM ReaderEntity r WHERE 1 = 1";
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -44,18 +45,17 @@ public class ReaderRepositoryImpl implements ReaderRepository {
         return entityManager.createQuery(dynamicQuery, ReaderEntity.class).getResultList();
     }
 
+    @Transactional
     @Override
     public ReaderEntity save(ReaderEntity reader) {
         entityManager.persist(reader);
-        reader.setCreatedDate(LocalDateTime.now());
-        reader.setLastModified(LocalDateTime.now());
         return reader;
     }
 
+    @Transactional
     @Override
     public ReaderEntity update(ReaderEntity reader) {
         entityManager.merge(reader);
-        reader.setLastModified(LocalDateTime.now());
         return reader;
     }
 
@@ -70,6 +70,7 @@ public class ReaderRepositoryImpl implements ReaderRepository {
         entity.setDeleted(true);
     }
 
+    @Transactional
     @Override
     public ReaderEntity delete(ReaderEntity reader) {
         entityManager.remove(reader);

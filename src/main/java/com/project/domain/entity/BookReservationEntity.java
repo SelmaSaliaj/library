@@ -17,8 +17,9 @@ import java.time.LocalDateTime;
 @Table(name = "book_reservation")
 public class BookReservationEntity extends BaseEntity{
 
+    @Transient
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime toBeReturnedDate;
+    private LocalDateTime returnedDate;
 
     @Enumerated(EnumType.STRING)
     private BookReservationStatus status;

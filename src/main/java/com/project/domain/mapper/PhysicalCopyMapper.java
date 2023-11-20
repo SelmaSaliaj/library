@@ -31,6 +31,8 @@ public class PhysicalCopyMapper {
         toReturn.setAuthor(physicalCopy.getAuthor());
         toReturn.setGenre(physicalCopy.getGenre());
         toReturn.setLocation(LocationMapper.toDTO(physicalCopy.getLocation()));
+        toReturn.setNumberOfCopies(physicalCopy.getNumberOfCopies());
+        toReturn.setNumberOfCopiesAvailable(physicalCopy.getNumberOfCopiesAvailable());
         return toReturn;
     }
 
@@ -41,6 +43,8 @@ public class PhysicalCopyMapper {
         toReturn.setAuthor(copy.getAuthor());
         toReturn.setGenre(copy.getGenre());
         toReturn.setLocation(LocationMapper.toEntity(copy.getLocation()));
+        toReturn.setNumberOfCopies(copy.getNumberOfCopies());
+        toReturn.setNumberOfCopiesAvailable(copy.getNumberOfCopiesAvailable());
         return toReturn;
     }
 

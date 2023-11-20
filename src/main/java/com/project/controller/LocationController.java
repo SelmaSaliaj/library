@@ -1,6 +1,7 @@
 package com.project.controller;
 
 import com.project.domain.dto.LocationDTO;
+import com.project.domain.dto.LocationRequest;
 import com.project.domain.dto.ReaderDTO;
 import com.project.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class LocationController {
     }
 
     @PostMapping
-    public void save(@RequestBody LocationDTO locationDTO){
+    public void save(@RequestBody LocationRequest locationDTO){
         locationService.save(locationDTO);
     }
 

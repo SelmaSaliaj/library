@@ -5,6 +5,7 @@ import com.project.filter.Filter;
 import com.project.repository.LocationRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -14,9 +15,9 @@ import java.util.Optional;
 @Repository
 public class LocationRepsitoryImpl implements LocationRepository {
 
-    private static final String FIND_QUERY = "SELECT l FROM LocationEntity WHERE l.id = :id";
+    private static final String FIND_QUERY = "SELECT l FROM LocationEntity l WHERE l.id = :id";
 
-    private static final String SELECT_ALL = "SELECT l FROM LocationEntity WHERE 1 = 1";
+    private static final String SELECT_ALL = "SELECT l FROM LocationEntity l WHERE 1 = 1";
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -43,18 +44,17 @@ public class LocationRepsitoryImpl implements LocationRepository {
         return entityManager.createQuery(dynamicQuery, LocationEntity.class).getResultList();
     }
 
+    @Transactional
     @Override
     public LocationEntity save(LocationEntity location) {
         entityManager.persist(location);
-        location.setCreatedDate(LocalDateTime.now());
-        location.setLastModified(LocalDateTime.now());
         return location;
     }
 
+    @Transactional
     @Override
     public LocationEntity update(LocationEntity location) {
         entityManager.merge(location);
-        location.setLastModified(LocalDateTime.now());
         return location;
     }
 
@@ -69,6 +69,7 @@ public class LocationRepsitoryImpl implements LocationRepository {
         entity.setDeleted(true);
     }
 
+    @Transactional
     @Override
     public LocationEntity delete(LocationEntity location) {
         entityManager.remove(location);

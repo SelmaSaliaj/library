@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PhysicalCopyRequest extends BaseRequest {
+public class PhysicalCopyRequest {
 
     private String title;
 

@@ -1,6 +1,7 @@
 package com.project.service.impl;
 
 import com.project.domain.dto.EBookDTO;
+import com.project.domain.dto.EBookRequest;
 import com.project.domain.entity.EBookEntity;
 import com.project.domain.mapper.EBookMapper;
 import com.project.filter.Filter;
@@ -24,8 +25,8 @@ public class EBookServiceImpl implements EBookService {
     }
 
     @Override
-    public void save(EBookDTO request) {
-        repository.save(EBookMapper.toEntity(request));
+    public void save(EBookRequest request) {
+        EBookMapper.toDTO(repository.save(EBookMapper.toEntity(request)));
     }
 
     @Override

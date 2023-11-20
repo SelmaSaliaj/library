@@ -7,7 +7,7 @@ import com.project.domain.entity.LocationEntity;
 public class LocationMapper {
     public static LocationEntity toEntity(LocationRequest locationRequest){
         LocationEntity toReturn = new LocationEntity();
-        toReturn.setRow(locationRequest.getRow());
+        toReturn.setPlacement(locationRequest.getPlacement());
         toReturn.setPosition(locationRequest.getPosition());
         toReturn.setNameOfTheShelf(locationRequest.getNameOfTheShelf());
         return toReturn;
@@ -17,7 +17,7 @@ public class LocationMapper {
         LocationDTO toReturn = new LocationDTO();
         toReturn.setId(location.getId());
         toReturn.setPosition(location.getPosition());
-        toReturn.setRow(location.getRow());
+        toReturn.setPlacement(location.getPlacement());
         toReturn.setNameOfTheShelf(location.getNameOfTheShelf());
         return toReturn;
     }
@@ -25,7 +25,7 @@ public class LocationMapper {
     public static LocationEntity toEntity(LocationDTO location){
         LocationEntity toReturn = new LocationEntity();
         toReturn.setId(location.getId());
-        toReturn.setRow(location.getRow());
+        toReturn.setPlacement(location.getPlacement());
         toReturn.setPosition(location.getPosition());
         toReturn.setNameOfTheShelf(location.getNameOfTheShelf());
         return toReturn;

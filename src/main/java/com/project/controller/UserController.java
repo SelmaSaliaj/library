@@ -1,6 +1,7 @@
 package com.project.controller;
 
 import com.project.domain.dto.UserDTO;
+import com.project.domain.dto.UserRequest;
 import com.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping
-    public void save(@RequestBody UserDTO userDTO){
+    public void save(@RequestBody UserRequest userDTO){
         userService.save(userDTO);
     }
 

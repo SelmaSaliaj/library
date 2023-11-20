@@ -1,6 +1,7 @@
 package com.project.controller;
 
 import com.project.domain.dto.ReaderDTO;
+import com.project.domain.dto.ReaderRequest;
 import com.project.service.ReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class ReaderController {
     }
 
     @PostMapping
-    public void save(@RequestBody ReaderDTO readerDTO){
+    public void save(@RequestBody ReaderRequest readerDTO){
         readerService.save(readerDTO);
     }
 

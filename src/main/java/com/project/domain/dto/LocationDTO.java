@@ -16,11 +16,9 @@ public class LocationDTO extends BaseDTO{
     @NotBlank(message = "The name of the shelf is required")
     private String nameOfTheShelf;
 
-    @NotNull
     @Positive(message = "The value needs to be a positive number")
-    private Integer row;
+    private Integer placement;
 
-    @NotNull
     @Positive(message = "The value needs to be a positive number")
     private Integer position;
 

@@ -1,7 +1,9 @@
 package com.project.domain.mapper;
 
 import com.project.domain.dto.ReaderDTO;
+import com.project.domain.dto.ReaderRequest;
 import com.project.domain.dto.ReservationDTO;
+import com.project.domain.dto.ReservationRequest;
 import com.project.domain.entity.ReaderEntity;
 import com.project.domain.entity.ReservationEntity;
 import org.mapstruct.Mapper;

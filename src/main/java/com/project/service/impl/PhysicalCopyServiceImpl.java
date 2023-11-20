@@ -1,6 +1,7 @@
 package com.project.service.impl;
 
 import com.project.domain.dto.PhysicalCopyDTO;
+import com.project.domain.dto.PhysicalCopyRequest;
 import com.project.domain.entity.PhysicalCopyEntity;
 import com.project.domain.mapper.PhysicalCopyMapper;
 import com.project.filter.Filter;
@@ -25,8 +26,8 @@ public class PhysicalCopyServiceImpl implements PhysicalCopyService {
     }
 
     @Override
-    public void save(PhysicalCopyDTO request) {
-        repository.save(PhysicalCopyMapper.toEntity(request));
+    public void save(PhysicalCopyRequest request) {
+        PhysicalCopyMapper.toDTO(repository.save(PhysicalCopyMapper.toEntity(request)));
     }
 
     @Override

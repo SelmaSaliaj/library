@@ -1,6 +1,7 @@
 package com.project.controller;
 
 import com.project.domain.dto.PhysicalCopyDTO;
+import com.project.domain.dto.PhysicalCopyRequest;
 import com.project.service.PhysicalCopyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class PhysicalCopyController {
     }
 
     @PostMapping
-    public void save(@RequestBody PhysicalCopyDTO physicalCopyDTO){
+    public void save(@RequestBody PhysicalCopyRequest physicalCopyDTO){
         bookService.save(physicalCopyDTO);
     }
 

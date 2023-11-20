@@ -1,6 +1,5 @@
 package com.project.domain.dto;
 
-import com.project.domain.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +14,6 @@ public class UserRequest {
 
     private String password;
 
-    private Role authorities;
+    private String authorities;
 
 }

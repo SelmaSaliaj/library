@@ -8,11 +8,11 @@ import lombok.Setter;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LocationRequest extends BaseRequest{
+public class LocationRequest {
 
     private String nameOfTheShelf;
 
-    private Integer row;
+    private Integer placement;
 
     private Integer position;
 

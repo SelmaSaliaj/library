@@ -16,7 +16,7 @@ public class LocationEntity extends BaseEntity{
     @Column(name = "shelf_name" , unique = true)
     private String nameOfTheShelf;
 
-    private Integer row;
+    private Integer placement;
 
     private Integer position;
 

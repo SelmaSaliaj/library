@@ -1,6 +1,7 @@
 package com.project.service.impl;
 
 import com.project.domain.dto.UserDTO;
+import com.project.domain.dto.UserRequest;
 import com.project.domain.entity.UserEntity;
 import com.project.domain.mapper.UserMapper;
 import com.project.filter.Filter;
@@ -24,8 +25,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(UserDTO request) {
-        repository.save(UserMapper.toEntity(request));
+    public void save(UserRequest request) {
+        UserMapper.toDTO(repository.save(UserMapper.toEntity(request)));
     }
 
     @Override

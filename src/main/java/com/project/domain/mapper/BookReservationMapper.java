@@ -1,8 +1,6 @@
 package com.project.domain.mapper;
 
-import com.project.domain.dto.BookReservationDTO;
-import com.project.domain.dto.PhysicalCopyDTO;
-import com.project.domain.dto.ReservationDTO;
+import com.project.domain.dto.*;
 import com.project.domain.entity.BookReservationEntity;
 import com.project.domain.entity.PhysicalCopyEntity;
 import com.project.domain.entity.ReservationEntity;
@@ -36,6 +34,11 @@ public interface BookReservationMapper {
 
     @Named("toPhysicalCopyEntity")
     default PhysicalCopyEntity toPhysicalCopyEntity(PhysicalCopyDTO book){
+        return PhysicalCopyMapper.toEntity(book);
+    }
+
+    @Named("toPhysicalCopy")
+    default PhysicalCopyEntity toPhysicalCopy(PhysicalCopyRequest book){
         return PhysicalCopyMapper.toEntity(book);
     }
 

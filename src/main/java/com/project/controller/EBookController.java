@@ -1,6 +1,7 @@
 package com.project.controller;
 
 import com.project.domain.dto.EBookDTO;
+import com.project.domain.dto.EBookRequest;
 import com.project.service.EBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class EBookController {
     }
 
     @PostMapping
-    public void save(@RequestBody EBookDTO ebookDTO){
+    public void save(@RequestBody EBookRequest ebookDTO){
         eBookService.save(ebookDTO);
     }
 

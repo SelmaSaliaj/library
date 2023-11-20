@@ -14,7 +14,7 @@ CREATE TABLE ebook (
 CREATE TABLE location (
                           id INT NOT NULL,
                           shelf_name VARCHAR(225) NOT NULL,
-                          `row` INT,
+                          placement INT,
                           position INT,
                           PRIMARY KEY (id)
 );

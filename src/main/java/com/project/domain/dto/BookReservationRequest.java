@@ -1,6 +1,7 @@
 package com.project.domain.dto;
 
 import com.project.domain.enums.BookReservationStatus;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,9 +12,13 @@ import java.time.LocalDateTime;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookReservationRequest extends BaseRequest {
+public class BookReservationRequest {
 
-    private LocalDateTime toBeReturnedDate;
+    private LocalDateTime createdDate;
+
+    private LocalDateTime lastModified;
+
+    private LocalDateTime returnedDate;
 
     private BookReservationStatus status;
 

@@ -1,6 +1,7 @@
 package com.project.service.impl;
 
 import com.project.domain.dto.LocationDTO;
+import com.project.domain.dto.LocationRequest;
 import com.project.domain.entity.LocationEntity;
 import com.project.domain.mapper.LocationMapper;
 import com.project.filter.Filter;
@@ -24,8 +25,8 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public void save(LocationDTO request) {
-        repository.save(LocationMapper.toEntity(request));
+    public void save(LocationRequest request) {
+        LocationMapper.toDTO(repository.save(LocationMapper.toEntity(request)));
     }
 
     @Override

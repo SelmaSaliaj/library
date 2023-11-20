@@ -22,15 +22,18 @@ public class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 
+    @Transient
     @CreatedDate
-    @Column(updatable = false)
+    @Column(updatable = false, name = "create_date")
     @Temporal(TemporalType.TIMESTAMP)
     protected LocalDateTime createdDate;
 
+    @Transient
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
     protected LocalDateTime lastModified;
 
+    @Transient
     protected boolean deleted;
 
 }

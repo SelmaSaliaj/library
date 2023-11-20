@@ -7,6 +7,16 @@ import com.project.domain.entity.UserEntity;
 
 public class ReaderMapper {
 
+    public static ReaderEntity toEntity(ReaderRequest readerRequest){
+        ReaderEntity toReturn = new ReaderEntity();
+        toReturn.setName(readerRequest.getName());
+        toReturn.setSurname(readerRequest.getSurname());
+        toReturn.setAddress(readerRequest.getAddress());
+        toReturn.setEmail(readerRequest.getEmail());
+        toReturn.setPhoneNumber(readerRequest.getPhoneNumber());
+        return toReturn;
+    }
+
     public static ReaderEntity toEntity(ReaderRequest readerRequest, UserEntity user){
         ReaderEntity toReturn = new ReaderEntity();
         toReturn.setName(readerRequest.getName());

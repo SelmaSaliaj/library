@@ -1,6 +1,7 @@
 package com.project.service.impl;
 
 import com.project.domain.dto.ReservationDTO;
+import com.project.domain.dto.ReservationRequest;
 import com.project.domain.mapper.ReservationMapper;
 import com.project.repository.ReservationDao;
 import com.project.service.ReservationService;
@@ -42,7 +43,7 @@ public class ReservationServiceImpl implements ReservationService {
     public void save(ReservationDTO request) {
         request.setCreatedDate(LocalDateTime.now());
         request.setLastModified(LocalDateTime.now());
-        repository.save(RESERVATION_MAPPER.toReservationEntity(request));
+        RESERVATION_MAPPER.toReservationDTO(repository.save(RESERVATION_MAPPER.toReservationEntity(request)));
     }
 
     @Override

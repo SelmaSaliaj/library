@@ -1,6 +1,7 @@
 package com.project.service.impl;
 
 import com.project.domain.dto.BookReservationDTO;
+import com.project.domain.dto.BookReservationRequest;
 import com.project.domain.entity.BookReservationEntity;
 import com.project.domain.exception.ResourceNotFoundException;
 import com.project.domain.mapper.BookReservationMapper;
@@ -47,7 +48,7 @@ public class BookReservationServiceImpl implements BookReservationService {
     public void save(BookReservationDTO request) {
         request.setCreatedDate(LocalDateTime.now());
         request.setLastModified(LocalDateTime.now());
-        repository.save(BOOK_RESERVATION_MAPPER.toBookReservationEntity(request));
+        BOOK_RESERVATION_MAPPER.toBookReservationDTO(repository.save(BOOK_RESERVATION_MAPPER.toBookReservationEntity(request)));
     }
 
     @Override
