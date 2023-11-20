@@ -1,13 +1,16 @@
 package com.project.service.impl;
 
 import com.project.domain.dto.PhysicalCopyDTO;
+import com.project.domain.entity.PhysicalCopyEntity;
 import com.project.domain.mapper.PhysicalCopyMapper;
+import com.project.filter.Filter;
 import com.project.repository.PhysicalCopyRepository;
 import com.project.service.PhysicalCopyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PhysicalCopyServiceImpl implements PhysicalCopyService {
@@ -19,11 +22,6 @@ public class PhysicalCopyServiceImpl implements PhysicalCopyService {
     @Override
     public PhysicalCopyDTO findById(Integer id) {
         return PhysicalCopyMapper.toDTO(repository.findById(id).orElseThrow(() -> new RuntimeException()));
-    }
-
-    @Override
-    public Page<PhysicalCopyDTO> getEntities(Pageable pageable) {
-        return null;
     }
 
     @Override
@@ -49,6 +47,14 @@ public class PhysicalCopyServiceImpl implements PhysicalCopyService {
     @Override
     public void restore(Integer id) {
         repository.restore(repository.findById(id).orElseThrow(() -> new RuntimeException()));
+    }
+
+    @Override
+    public List<PhysicalCopyDTO> getAllEBooks(Filter... filters) {
+        List<PhysicalCopyEntity> books = repository.getAll(filters);
+        return books.stream()
+                .map(b -> PhysicalCopyMapper.toDTO(b))
+                .collect(Collectors.toList());
     }
 
 }

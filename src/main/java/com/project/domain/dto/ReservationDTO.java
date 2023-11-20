@@ -14,9 +14,6 @@ import java.time.LocalDate;
 public class ReservationDTO extends BaseDTO{
 
     @NotNull
-    private LocalDate createdDate;
-
-    @NotNull
     private ReaderDTO reader;
 
 }

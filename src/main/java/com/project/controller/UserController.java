@@ -1,6 +1,5 @@
 package com.project.controller;
 
-import com.project.domain.dto.PhysicalCopyDTO;
 import com.project.domain.dto.UserDTO;
 import com.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

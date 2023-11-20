@@ -9,7 +9,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
@@ -24,12 +24,12 @@ public class BaseEntity {
 
     @CreatedDate
     @Column(updatable = false)
-    @Temporal(TemporalType.DATE)
-    protected LocalDate createdDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    protected LocalDateTime createdDate;
 
     @LastModifiedDate
-    @Temporal(TemporalType.DATE)
-    protected LocalDate lastModified;
+    @Temporal(TemporalType.TIMESTAMP)
+    protected LocalDateTime lastModified;
 
     protected boolean deleted;
 

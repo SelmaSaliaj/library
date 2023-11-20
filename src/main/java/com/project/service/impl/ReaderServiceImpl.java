@@ -1,13 +1,16 @@
 package com.project.service.impl;
 
 import com.project.domain.dto.ReaderDTO;
+import com.project.domain.entity.ReaderEntity;
 import com.project.domain.mapper.ReaderMapper;
+import com.project.filter.Filter;
 import com.project.repository.ReaderRepository;
 import com.project.service.ReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ReaderServiceImpl implements ReaderService {
@@ -18,11 +21,6 @@ public class ReaderServiceImpl implements ReaderService {
     @Override
     public ReaderDTO findById(Integer id) {
         return ReaderMapper.toDTO(repository.findById(id).orElseThrow(() -> new RuntimeException()));
-    }
-
-    @Override
-    public Page<ReaderDTO> getEntities(Pageable pageable) {
-        return null;
     }
 
     @Override
@@ -48,6 +46,14 @@ public class ReaderServiceImpl implements ReaderService {
     @Override
     public void restore(Integer id) {
         repository.restore(repository.findById(id).orElseThrow(() -> new RuntimeException()));
+    }
+
+    @Override
+    public List<ReaderDTO> getAllEBooks(Filter... filters) {
+        List<ReaderEntity> readers = repository.getAll(filters);
+        return readers.stream()
+                .map(r -> ReaderMapper.toDTO(r))
+                .collect(Collectors.toList());
     }
 
 }

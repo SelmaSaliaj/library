@@ -10,9 +10,7 @@ import java.time.LocalDate;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReservationRequest {
-
-    private LocalDate createdDate;
+public class ReservationRequest extends BaseRequest{
 
     private Integer readerId;
 

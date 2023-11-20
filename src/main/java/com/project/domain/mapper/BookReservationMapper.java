@@ -17,16 +17,16 @@ public interface BookReservationMapper {
 
     ReservationMapper RESERVATION_MAPPER = Mappers.getMapper(ReservationMapper.class);
 
-    @Mapping(source = "reservationEntity",target = "reservationDTO",qualifiedByName = "toReservationDTO")
-    @Mapping(source = "physicalCopyEntity",target = "physicalCopyDTO",qualifiedByName = "toPhysicalCopyDTO")
+    @Mapping(source = "reservation",target = "reservation",qualifiedByName = "toReservationDTO")
+    @Mapping(source = "book",target = "book",qualifiedByName = "toPhysicalCopyDTO")
     BookReservationDTO toBookReservationDTO(BookReservationEntity reservation);
 
-    @Mapping(source = "reservationDTO",target = "reservationEntity",qualifiedByName = "toReservationEntity")
-    @Mapping(source = "physicalCopyDTO",target = "physicalCopyEntity",qualifiedByName = "toPhysicalCopyEntity")
+    @Mapping(source = "reservation",target = "reservation",qualifiedByName = "toReservationEntity")
+    @Mapping(source = "book",target = "book",qualifiedByName = "toPhysicalCopyEntity")
     BookReservationEntity toBookReservationEntity(BookReservationDTO reservation);
 
-    @Mapping(source = "reservationDTO",target = "reservationEntity",qualifiedByName = "toReservationEntity")
-    @Mapping(source = "physicalCopyDTO",target = "physicalCopyEntity",qualifiedByName = "toPhysicalCopyEntity")
+    @Mapping(source = "reservation",target = "reservation",qualifiedByName = "toReservationEntity")
+    @Mapping(source = "book",target = "book",qualifiedByName = "toPhysicalCopyEntity")
     BookReservationEntity toBookReservationEntity(BookReservationDTO dto, @MappingTarget BookReservationEntity reservation);
 
     @Named("toPhysicalCopyDTO")

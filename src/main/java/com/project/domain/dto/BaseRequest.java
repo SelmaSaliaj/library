@@ -5,17 +5,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EBookRequest extends BaseRequest {
+public class BaseRequest {
 
-    private String title;
+    protected Integer id;
 
-    private String author;
+    private LocalDateTime createdDate;
 
-    private String genre;
-
-    private String link;
+    private LocalDateTime lastModified;
 
 }

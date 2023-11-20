@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReaderRequest {
+public class ReaderRequest extends BaseRequest{
 
     private String name;
 

@@ -1,11 +1,13 @@
 package com.project.repository.impl;
 
 import com.project.domain.entity.EBookEntity;
+import com.project.filter.Filter;
 import com.project.repository.EBookRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,25 +16,45 @@ public class EBookRepositoryImpl implements EBookRepository {
 
     private static final String FIND_QUERY = "SELECT e FROM EBookEntity WHERE e.id = :id";
 
-    private static final String GET_ALl_QUERY = "SELECT * FROM EBookEntity";
+    private static final String SELECT_ALL = "SELECT e FROM EBookEntity WHERE 1 = 1";
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    public List<EBookEntity> getAll() {
-        return entityManager.createQuery(GET_ALl_QUERY, EBookEntity.class).getResultList();
+    public List<EBookEntity> getAll(Filter... filters) {
+        String dynamicQuery = SELECT_ALL;
+
+        if (filters != null) {
+            if (filters[0].getValue() != null) {
+                dynamicQuery += "AND c." + filters[0].getField() + " " +
+                        filters[0].getOperator() + " '%" + filters[0].getValue() + "%' ";
+            }
+            if (filters[0].getSort() != null) {
+                dynamicQuery += "ORDER BY c." + filters[0].getField() + " " + filters[0].getSort();
+            }
+            if (filters[0].getPageSize() != null && filters[0].getPageNumber() != null) {
+                return entityManager.createQuery(dynamicQuery, EBookEntity.class)
+                        .setFirstResult((filters[0].getPageNumber() - 1) * filters[0].getPageSize())
+                        .setMaxResults(filters[0].getPageSize())
+                        .getResultList();
+            }
+        }
+        return entityManager.createQuery(dynamicQuery, EBookEntity.class).getResultList();
     }
 
     @Override
     public EBookEntity save(EBookEntity eBook) {
         entityManager.persist(eBook);
+        eBook.setCreatedDate(LocalDateTime.now());
+        eBook.setLastModified(LocalDateTime.now());
         return eBook;
     }
 
     @Override
     public EBookEntity update(EBookEntity eBook) {
         entityManager.merge(eBook);
+        eBook.setLastModified(LocalDateTime.now());
         return eBook;
     }
 

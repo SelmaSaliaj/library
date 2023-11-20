@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
@@ -16,8 +17,8 @@ import java.time.LocalDate;
 @Table(name = "book_reservation")
 public class BookReservationEntity extends BaseEntity{
 
-    @Temporal(TemporalType.DATE)
-    private LocalDate toBeReturnedDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime toBeReturnedDate;
 
     @Enumerated(EnumType.STRING)
     private BookReservationStatus status;

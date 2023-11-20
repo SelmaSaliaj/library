@@ -1,13 +1,16 @@
 package com.project.service.impl;
 
 import com.project.domain.dto.LocationDTO;
+import com.project.domain.entity.LocationEntity;
 import com.project.domain.mapper.LocationMapper;
+import com.project.filter.Filter;
 import com.project.repository.LocationRepository;
 import com.project.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LocationServiceImpl implements LocationService {
@@ -18,11 +21,6 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public LocationDTO findById(Integer id) {
         return LocationMapper.toDTO(repository.findById(id).orElseThrow(() -> new RuntimeException()));
-    }
-
-    @Override
-    public Page<LocationDTO> getEntities(Pageable pageable) {
-        return null;
     }
 
     @Override
@@ -49,4 +47,13 @@ public class LocationServiceImpl implements LocationService {
     public void restore(Integer id) {
         repository.restore(repository.findById(id).orElseThrow(() -> new RuntimeException()));
     }
+
+    @Override
+    public List<LocationDTO> getAllEBooks(Filter... filters) {
+        List<LocationEntity> locations = repository.getAll(filters);
+        return locations.stream()
+                .map(l -> LocationMapper.toDTO(l))
+                .collect(Collectors.toList());
+    }
+
 }

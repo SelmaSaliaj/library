@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LocationRequest {
+public class LocationRequest extends BaseRequest{
 
     private String nameOfTheShelf;
 

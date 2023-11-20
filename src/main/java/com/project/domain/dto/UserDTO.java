@@ -1,10 +1,9 @@
 package com.project.domain.dto;
 
+import com.project.domain.enums.Role;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 
 @Getter @Setter
 @NoArgsConstructor
@@ -15,6 +14,6 @@ public class UserDTO extends BaseDTO{
     private String username;
 
     @NotNull(message = "Authority is required")
-    private String authorities;
+    private Role authorities;
 
 }

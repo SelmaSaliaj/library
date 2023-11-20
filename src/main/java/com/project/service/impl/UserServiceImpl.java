@@ -1,13 +1,16 @@
 package com.project.service.impl;
 
 import com.project.domain.dto.UserDTO;
+import com.project.domain.entity.UserEntity;
 import com.project.domain.mapper.UserMapper;
+import com.project.filter.Filter;
 import com.project.repository.UserRepository;
 import com.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -18,11 +21,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO findById(Integer id) {
         return UserMapper.toDTO(repository.findById(id).orElseThrow(() -> new RuntimeException()));
-    }
-
-    @Override
-    public Page<UserDTO> getEntities(Pageable pageable) {
-        return null;
     }
 
     @Override
@@ -49,5 +47,14 @@ public class UserServiceImpl implements UserService {
     public void restore(Integer id) {
         repository.restore(repository.findById(id).orElseThrow(() -> new RuntimeException()));
     }
+
+    @Override
+    public List<UserDTO> getAllEBooks(Filter... filters) {
+        List<UserEntity> users = repository.getAll(filters);
+        return users.stream()
+                .map(u -> UserMapper.toDTO(u))
+                .collect(Collectors.toList());
+    }
+
 
 }

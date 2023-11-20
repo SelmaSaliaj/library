@@ -10,8 +10,6 @@ public interface IBaseService<T extends BaseDTO, I extends Serializable> {
 
     T findById(I id);
 
-    Page<T> getEntities(Pageable pageable);
-
     void save(T request);
 
     void update(T request);

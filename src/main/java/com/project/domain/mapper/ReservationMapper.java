@@ -12,13 +12,13 @@ import org.mapstruct.Named;
 @Mapper
 public interface ReservationMapper {
 
-    @Mapping(source = "readerEntity",target = "readerDTO",qualifiedByName = "toReaderDTO")
+    @Mapping(source = "reader",target = "reader",qualifiedByName = "toReaderDTO")
     ReservationDTO toReservationDTO(ReservationEntity reservation);
 
-    @Mapping(source = "readerDTO",target = "reader",qualifiedByName = "toReaderEntity")
+    @Mapping(source = "reader",target = "reader",qualifiedByName = "toReaderEntity")
     ReservationEntity toReservationEntity(ReservationDTO reservation);
 
-    @Mapping(source = "readerDTO",target = "reader",qualifiedByName = "toReaderEntity")
+    @Mapping(source = "reader",target = "reader",qualifiedByName = "toReaderEntity")
     ReservationEntity toReservationEntity(ReservationDTO dto, @MappingTarget ReservationEntity reservation);
 
     @Named("toReaderDTO")
