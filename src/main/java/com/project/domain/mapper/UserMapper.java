@@ -11,7 +11,6 @@ public class UserMapper {
         toReturn.setUsername(userRequest.getUsername());
         toReturn.setPassword(userRequest.getPassword());
         toReturn.setAuthorities(userRequest.getAuthorities());
-        toReturn.setReader(userRequest.getReader());
         return toReturn;
     }
 
@@ -19,7 +18,7 @@ public class UserMapper {
         UserDTO toReturn = new UserDTO();
         toReturn.setId(user.getId());
         toReturn.setUsername(user.getUsername());
-        toReturn.setAuthorities(user.getAuthorities().toString());
+        toReturn.setAuthorities(user.getAuthorities());
         toReturn.setReader(ReaderMapper.toDTO(user.getReader()));
         return toReturn;
     }
@@ -30,14 +29,6 @@ public class UserMapper {
         toReturn.setUsername(user.getUsername());
         toReturn.setAuthorities(user.getAuthorities());
         toReturn.setReader(ReaderMapper.toEntity(user.getReader()));
-        return toReturn;
-    }
-
-    public static UserDTO toDTO(UserRequest userRequest){
-        UserDTO toReturn = new UserDTO();
-        toReturn.setUsername(userRequest.getUsername());
-        toReturn.setAuthorities(userRequest.getAuthorities());
-        toReturn.setReader(ReaderMapper.toDTO(userRequest.getReader()));
         return toReturn;
     }
 

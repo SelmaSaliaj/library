@@ -4,22 +4,20 @@ import com.project.domain.dto.UserDTO;
 import com.project.domain.dto.UserRequest;
 import com.project.domain.entity.UserEntity;
 import com.project.domain.mapper.UserMapper;
+import com.project.filter.Filter;
 import com.project.repository.UserRepository;
 import com.project.service.UserService;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Transactional
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository repository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDTO findById(Integer id) {
@@ -27,22 +25,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO save(UserRequest request) {
-        String password = request.getPassword();
-        request.setPassword(passwordEncoder.encode(password));
-        return UserMapper.toDTO(repository.save(UserMapper.toEntity(request)));
+    public void save(UserRequest request) {
+        UserMapper.toDTO(repository.save(UserMapper.toEntity(request)));
     }
 
     @Override
-    public UserDTO update(UserRequest request, Integer id) {
-        UserDTO userDTO = UserMapper.toDTO(request);
-        userDTO.setId(id);
-        return UserMapper.toDTO(repository.update(UserMapper.toEntity(userDTO)));
+    public void update(UserDTO request) {
+        repository.update(UserMapper.toEntity(request));
     }
 
     @Override
-    public UserDTO delete(Integer id) {
-        UserEntity entity = repository.findById(id);
-        return UserMapper.toDTO(repository.delete(entity));
+    public void delete(Integer id) {
+        repository.delete(repository.findById(id));
     }
+
+    @Override
+    public List<UserDTO> getAllEBooks(Filter... filters) {
+        List<UserEntity> users = repository.getAll(filters);
+        return users.stream()
+                .map(u -> UserMapper.toDTO(u))
+                .collect(Collectors.toList());
+    }
+
+
 }

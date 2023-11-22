@@ -2,7 +2,10 @@ package com.project.domain.entity;
 
 import com.project.domain.enums.Role;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,19 +16,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
-@Builder
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user")
-public class UserEntity extends BaseEntity implements UserDetails{
+public class UserEntity extends BaseEntity{
+
+    //implements UserDetails
 
     @Column(unique = true)
     private String username;
 
     private String password;
 
-    private String authorities;
+    @Enumerated(EnumType.STRING)
+    private Role authorities;
 
     @OneToOne
     @JoinColumn(name = "reader_id" , referencedColumnName = "id" , unique = true)
@@ -35,9 +40,9 @@ public class UserEntity extends BaseEntity implements UserDetails{
         this.username = username;
     }
 
-   @Override
+   /* @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.stream(authorities.split(",")).map(SimpleGrantedAuthority::new).toList();
+        return List.of(new SimpleGrantedAuthority(authorities.name()));
     }
 
     @Override
@@ -69,5 +74,5 @@ public class UserEntity extends BaseEntity implements UserDetails{
     public boolean isEnabled() {
         return true;
     }
-
+*/
 }

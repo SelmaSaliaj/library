@@ -2,17 +2,20 @@ package com.project.service;
 
 import com.project.domain.dto.UserDTO;
 import com.project.domain.dto.UserRequest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.project.filter.Filter;
 
-public interface UserService {
+import java.util.List;
+
+public interface UserService{
 
     UserDTO findById(Integer id);
 
-    UserDTO save(UserRequest request);
+    void save(UserRequest request);
 
-    UserDTO update(UserRequest request, Integer id);
+    void update(UserDTO request);
 
-    UserDTO delete(Integer id);
+    void delete(Integer id);
+
+    List<UserDTO> getAllEBooks(Filter... filters);
 
 }

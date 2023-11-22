@@ -15,6 +15,4 @@ public class Constant {
 
     public static final String SELECT_BOOK_RESERVATION_BY_RESERVATION_ID = "SELECT b FROM BookReservationEntity b WHERE b.reservationEntity.id = :id";
     public static final String SELECT_BOOK_RESERVATION_BY_RESERVATION_ID_AND_STATUS_NOT_RETURNED = "SELECT b FROM BookReservationEntity b WHERE b.reservationEntity.id = :id AND b.status != 'RETURNED'";
-    public static final String FIND_QUERY_BY_ID_USER = "SELECT u FROM UserEntity u WHERE u.id = :id";
-    public static final String FIND_QUERY_BY_USERNAME_USER = "SELECT u FROM UserEntity u WHERE u.username = :username";
 }

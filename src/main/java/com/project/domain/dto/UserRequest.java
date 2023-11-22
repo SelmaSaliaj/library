@@ -1,6 +1,5 @@
 package com.project.domain.dto;
 
-import com.project.domain.entity.ReaderEntity;
 import com.project.domain.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,8 +15,8 @@ public class UserRequest {
 
     private String password;
 
-    private String authorities;
+    private Role authorities;
 
-    private ReaderEntity reader;
+    private Integer readerId;
 
 }
