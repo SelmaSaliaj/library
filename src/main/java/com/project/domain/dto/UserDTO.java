@@ -17,8 +17,14 @@ public class UserDTO extends BaseDTO{
     private String username;
 
     @NotNull(message = "Authority is required")
-    private String authorities;
+    private Role authorities;
 
     private ReaderDTO reader;
+
+    public UserDTO(Integer id, String username, Role authorities) {
+        super(id);
+        this.username = username;
+        this.authorities = authorities;
+    }
 
 }

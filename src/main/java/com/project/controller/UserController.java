@@ -16,8 +16,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> findById(@PathVariable("id") Integer id){
-        UserDTO userDTO = userService.findById(id);
-        return userDTO != null? ResponseEntity.ok(userDTO):ResponseEntity.notFound().build();
+        return ResponseEntity.ok(userService.findById(id));
     }
 
     @PostMapping
@@ -25,14 +24,15 @@ public class UserController {
         userService.save(userDTO);
     }
 
-    @PutMapping("/{id}")
-    public void update(@RequestBody UserRequest user,@PathVariable Integer id){
-        userService.update(user,id);
+    @PutMapping
+    public void update(@RequestBody UserDTO userDTO){
+        userService.update(userDTO);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Integer id){
         userService.delete(id);
     }
+
 
 }
